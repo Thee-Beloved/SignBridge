@@ -18,7 +18,7 @@ import json
 import threading
 import subprocess
 from pathlib import Path
-from flask import Flask, request, jsonify, send_file, after_this_request
+from flask import Flask, request, jsonify, send_file, send_from_directory, after_this_request
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -44,11 +44,7 @@ from pipeline.avatar_generate import (
 # ── App setup ─────────────────────────────────────────────────────────────────
 FRONTEND_DIR = Path(__file__).parent.parent / "frontend"
 
-app = Flask(
-    __name__,
-    static_folder=str(FRONTEND_DIR),
-    static_url_path=""
-)
+app = Flask(__name__)
 
 # CORS: allow frontend origin only (localhost in dev, set ALLOWED_ORIGIN in prod)
 ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN", "http://localhost:5000")
@@ -96,6 +92,27 @@ def add_security_headers(response):
             "connect-src 'self';"
         )
     return response
+
+
+# ── Frontend routes ───────────────────────────────────────────────────────────
+@app.route("/")
+def index():
+    """Serve the frontend SPA."""
+    return send_from_directory(str(FRONTEND_DIR), "index.html")
+
+
+@app.route("/<path:filename>")
+def static_files(filename):
+    """Serve any other static frontend file (app.js, styles.css, assets)."""
+    # Security: prevent path traversal — must stay inside FRONTEND_DIR
+    file_path = (FRONTEND_DIR / filename).resolve()
+    try:
+        file_path.relative_to(FRONTEND_DIR.resolve())
+    except ValueError:
+        return jsonify({"error": "Access denied"}), 403
+    if file_path.exists():
+        return send_from_directory(str(FRONTEND_DIR), filename)
+    return jsonify({"error": "Not found"}), 404
 
 
 # ── Input validation helpers ──────────────────────────────────────────────────
@@ -256,17 +273,42 @@ def process_reel():
             return jsonify({"error": err}), 400
 
         video_path = str(UPLOAD_DIR / f"{job_id}_input.mp4")
-        dl_result = subprocess.run(
-            ["python", "-m", "yt_dlp",
-             "-o", video_path,
-             "--format", "mp4",
-             "--max-filesize", f"{MAX_UPLOAD_MB}m",
-             "--no-playlist",
-             video_url],
-            capture_output=True, text=True, timeout=120
-        )
+        
+        # yt-dlp command with Instagram-specific options
+        dl_cmd = [
+            "python", "-m", "yt_dlp",
+            "-o", video_path,
+            "--format", "best[ext=mp4]/best",  # Prefer mp4, fallback to best
+            "--max-filesize", f"{MAX_UPLOAD_MB}m",
+            "--no-playlist",
+            "--no-check-certificates",  # Skip SSL cert validation
+            "--user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "--referer", "https://www.instagram.com/",
+            "--extractor-retries", "3",
+            "--fragment-retries", "3",
+            "--socket-timeout", "30",
+            video_url
+        ]
+        
+        try:
+            dl_result = subprocess.run(
+                dl_cmd,
+                capture_output=True,
+                text=True,
+                timeout=90  # Reduced from 120s
+            )
+        except subprocess.TimeoutExpired:
+            return jsonify({"error": "Video download timed out. Instagram may be blocking the request. Try uploading the video file directly."}), 408
+            
         if dl_result.returncode != 0:
-            return jsonify({"error": f"Could not download video: {dl_result.stderr[:300]}"}), 400
+            error_msg = dl_result.stderr[:500] if dl_result.stderr else "Unknown download error"
+            # Check for common Instagram errors
+            if "login" in error_msg.lower() or "private" in error_msg.lower():
+                return jsonify({"error": "This Instagram video requires authentication or is private. Try uploading the video file directly."}), 403
+            elif "not available" in error_msg.lower():
+                return jsonify({"error": "Video not available or was deleted."}), 404
+            else:
+                return jsonify({"error": f"Could not download video: {error_msg}"}), 400
 
     # ── Validate language ─────────────────────────────────────────────────────
     allowed_languages = {"KSL", "USL", "TSL", "ASL"}

@@ -81,25 +81,16 @@ def segment_frame_with_sam(frame_base64: str, video_width: int, video_height: in
             timeout=15,  # Hard cap per frame
             json={
                 "model": "sam-3.1",
-                "input": [{"role": "user", "content": [
-                    {
-                        "type": "text",
-                        "text": (
-                            "Analyze this video frame. Return JSON with bounding boxes "
-                            "(x, y, width, height as 0.0-1.0 fractions of image size) for: "
-                            "person, face, hands, text_overlay. "
-                            "Also return safe_corners showing which corners "
-                            "(bottom_right, bottom_left, top_right, top_left) "
-                            "are free of detected objects. "
-                            'Example: {"segments":{"face":{"x":0.3,"y":0.1,"w":0.4,"h":0.3}},'
-                            '"safe_corners":{"bottom_right":true,"bottom_left":false}}'
-                        )
-                    },
-                    {
-                        "type": "image_url",
-                        "image_url": {"url": f"data:image/jpeg;base64,{frame_base64}"}
-                    }
-                ]}]
+                "input": [{
+                    "role": "user",
+                    "content": f"data:image/jpeg;base64,{frame_base64}"
+                }],
+                "text": (
+                    "Analyze this video frame. Return JSON with bounding boxes "
+                    "(x, y, width, height as 0.0-1.0 fractions of image size) for: "
+                    "person, face, hands, text_overlay. "
+                    'Example: {"segments":{"face":{"x":0.3,"y":0.1,"w":0.4,"h":0.3}}}'
+                )
             }
         )
     except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:

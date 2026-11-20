@@ -21,6 +21,7 @@ import requests
 import base64
 import json
 import subprocess
+import platform
 from collections import defaultdict
 from typing import List, Dict, Optional
 from pathlib import Path
@@ -114,16 +115,10 @@ def generate_avatar_frame(
         json={
             "model": "muse-image-1.0",
             "prompt": full_prompt,
-            "negative_prompt": (
-                "blurry hands, hidden hands, jewelry on hands, "
-                "background clutter, text watermark, low quality, "
-                "multiple people, cartoon style"
-            ),
             "size": "512x512",
             "n": 1,
             "seed": AVATAR_SEED,
-            "response_format": "b64_json",
-            "style": "natural"
+            "response_format": "b64_json"
         },
         timeout=60
     )
@@ -436,25 +431,66 @@ def creator_mode_ksl_to_voice(
     with open(voice_path, "wb") as f:
         f.write(voice_response.content)
 
-    # Step 4: Merge voice + captions onto creator's video (safe path quoting)
-    safe_text = re.sub(r"['\"]", "", english_text)[:80]  # strip quotes for drawtext
-    final_cmd = [
-        "ffmpeg", "-y",
-        "-i", creator_video_path,
-        "-i", voice_path,
-        "-filter_complex",
-        (
-            f"[0:v]drawtext=text='{safe_text}':"
-            "fontsize=28:fontcolor=white:box=1:boxcolor=black@0.6:"
-            "x=(w-text_w)/2:y=h-60[v]"
-        ),
-        "-map", "[v]",
-        "-map", "1:a",
-        "-c:v", "libx264",
-        "-c:a", "aac",
-        "-y", output_path
-    ]
-    subprocess.run(final_cmd, check=True)
+    # Step 4: Merge voice + captions onto creator's video
+    # Windows FFmpeg often has fontconfig issues, so we'll use a simpler approach
+    # without drawtext for now, or specify a font file explicitly
+    
+    import platform
+    
+    # Try to find a system font on Windows
+    font_path = None
+    if platform.system() == "Windows":
+        # Common Windows font locations
+        possible_fonts = [
+            "C:/Windows/Fonts/arial.ttf",
+            "C:/Windows/Fonts/Arial.ttf",
+            "C:/Windows/Fonts/segoeui.ttf",
+            "C:/Windows/Fonts/verdana.ttf"
+        ]
+        for font in possible_fonts:
+            if os.path.exists(font):
+                font_path = font.replace("\\", "/").replace(":", "\\:")
+                break
+    
+    if font_path:
+        # Use drawtext with explicit font file
+        safe_text = re.sub(r"['\"]", "", english_text)[:80]  # strip quotes
+        safe_text = safe_text.replace(":", r"\:").replace("'", r"\'")  # escape special chars
+        
+        final_cmd = [
+            "ffmpeg", "-y",
+            "-i", creator_video_path,
+            "-i", voice_path,
+            "-filter_complex",
+            (
+                f"[0:v]drawtext=fontfile='{font_path}':text='{safe_text}':"
+                "fontsize=28:fontcolor=white:box=1:boxcolor=black@0.6:"
+                "x=(w-text_w)/2:y=h-60[v]"
+            ),
+            "-map", "[v]",
+            "-map", "1:a",
+            "-c:v", "libx264",
+            "-c:a", "aac",
+            output_path
+        ]
+    else:
+        # Fallback: Just merge video and audio without captions
+        print("[Creator Mode] Warning: No font found, skipping captions overlay")
+        final_cmd = [
+            "ffmpeg", "-y",
+            "-i", creator_video_path,
+            "-i", voice_path,
+            "-map", "0:v",
+            "-map", "1:a",
+            "-c:v", "copy",  # Just copy video stream
+            "-c:a", "aac",
+            output_path
+        ]
+    
+    result = subprocess.run(final_cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"[Creator Mode] FFmpeg error: {result.stderr[-1000:]}")
+        raise RuntimeError(f"FFmpeg creator mode failed: {result.stderr[-500:]}")
 
     return {
         "mode": "creator",
