@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141824"/>
+      <stop offset="100%" stop-color="#0a0d16"/>
+    </linearGradient>
+    <linearGradient id="skinBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3f1d"/>
+      <stop offset="100%" stop-color="#54260f"/>
+    </linearGradient>
+    <linearGradient id="skinHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#934d26"/>
+      <stop offset="100%" stop-color="#6b3414"/>
+    </linearGradient>
+    <linearGradient id="kitengeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="50%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <linearGradient id="glowG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Studio Background -->
+  <rect width="400" height="480" rx="16" fill="url(#bgGrad)"/>
+  <circle cx="200" cy="180" r="140" fill="url(#glowG)"/>
+
+  <!-- Torso & Shoulders -->
+  <path d="M 80 480 C 90 380 130 340 200 340 C 270 340 310 380 320 480 Z" fill="url(#kitengeGrad)"/>
+  
+  <!-- Kitenge Fabric Pattern Geometry -->
+  <path d="M 120 420 L 150 480 M 180 390 L 220 480 M 240 400 L 270 480 M 140 360 L 260 360" stroke="#f59e0b" stroke-width="2.5" opacity="0.4" stroke-dasharray="4,4"/>
+  <circle cx="160" cy="410" r="12" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.5"/>
+  <circle cx="240" cy="410" r="12" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.5"/>
+
+  <!-- Neck -->
+  <path d="M 175 270 L 175 350 L 225 350 L 225 270 Z" fill="url(#skinHighlight)"/>
+  <path d="M 175 320 Q 200 340 225 320" stroke="#3b1706" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- Head Base -->
+  <ellipse cx="200" cy="205" rx="55" ry="68" fill="url(#skinBase)"/>
+
+  <!-- Hair (Natural Short Curls / Fade) -->
+  <path d="M 140 190 C 135 130 160 115 200 115 C 240 115 265 130 260 190 C 255 150 235 135 200 135 C 165 135 145 150 140 190 Z" fill="#171717"/>
+  <circle cx="155" cy="140" r="14" fill="#262626"/>
+  <circle cx="180" cy="125" r="15" fill="#1c1917"/>
+  <circle cx="210" cy="122" r="16" fill="#262626"/>
+  <circle cx="238" cy="135" r="14" fill="#1c1917"/>
+
+  <!-- Face Features: Eyes, Brows, Nose, Smile -->
+  <!-- Brows -->
+  <path d="M 160 176 Q 175 170 188 175" stroke="#1f140e" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M 212 175 Q 225 170 240 176" stroke="#1f140e" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="174" cy="188" rx="8" ry="5.5" fill="#ffffff"/>
+  <circle cx="174" cy="188" r="4.2" fill="#26150b"/>
+  <circle cx="176" cy="186.5" r="1.5" fill="#ffffff"/>
+
+  <ellipse cx="226" cy="188" rx="8" ry="5.5" fill="#ffffff"/>
+  <circle cx="226" cy="188" r="4.2" fill="#26150b"/>
+  <circle cx="228" cy="186.5" r="1.5" fill="#ffffff"/>
+
+  <!-- Nose -->
+  <path d="M 200 188 L 197 215 Q 200 220 205 218" stroke="#4a1f0a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Warm Smile -->
+  <path d="M 182 234 Q 200 252 218 234" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <path d="M 180 233 Q 200 255 220 233" stroke="#3b1706" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Cheeks highlight -->
+  <ellipse cx="166" cy="214" rx="12" ry="7" fill="#934d26" opacity="0.4"/>
+  <ellipse cx="234" cy="214" rx="12" ry="7" fill="#934d26" opacity="0.4"/>
+
+  <!-- Ears & Gold Studs -->
+  <ellipse cx="143" cy="205" rx="7" ry="14" fill="url(#skinBase)"/>
+  <circle cx="145" cy="212" r="3" fill="#f59e0b"/>
+  <ellipse cx="257" cy="205" rx="7" ry="14" fill="url(#skinBase)"/>
+  <circle cx="255" cy="212" r="3" fill="#f59e0b"/>
+
+  <!-- ─── SIGNING HANDS (Articulated KSL Gesture at Chest Height) ─── -->
+  <!-- Left Hand (Signing 'ADD / TOGETHER') -->
+  <g transform="translate(105, 310) rotate(-12)">
+    <!-- Palm -->
+    <rect x="20" y="30" width="36" height="38" rx="10" fill="url(#skinHighlight)"/>
+    <!-- Thumb -->
+    <path d="M 18 42 C 10 38 12 24 22 26 L 24 38 Z" fill="url(#skinHighlight)"/>
+    <!-- Fingers (open and curved) -->
+    <rect x="22" y="8" width="8" height="26" rx="4" fill="url(#skinHighlight)"/>
+    <rect x="31" y="4" width="8" height="30" rx="4" fill="url(#skinHighlight)"/>
+    <rect x="40" y="7" width="8" height="27" rx="4" fill="url(#skinHighlight)"/>
+    <rect x="49" y="14" width="7" height="20" rx="4" fill="url(#skinHighlight)"/>
+    <!-- Knuckle crease accents -->
+    <line x1="24" y1="20" x2="28" y2="20" stroke="#4a1f0a" stroke-width="1.2" opacity="0.5"/>
+    <line x1="33" y1="18" x2="37" y2="18" stroke="#4a1f0a" stroke-width="1.2" opacity="0.5"/>
+    <line x1="42" y1="20" x2="46" y2="20" stroke="#4a1f0a" stroke-width="1.2" opacity="0.5"/>
+  </g>
+
+  <!-- Right Hand (Signing 'COOK / STIR') -->
+  <g transform="translate(215, 300) rotate(15)">
+    <!-- Palm -->
+    <rect x="20" y="30" width="36" height="38" rx="10" fill="url(#skinHighlight)"/>
+    <!-- Thumb -->
+    <path d="M 58 42 C 66 38 64 24 54 26 L 52 38 Z" fill="url(#skinHighlight)"/>
+    <!-- Fingers -->
+    <rect x="46" y="8" width="8" height="26" rx="4" fill="url(#skinHighlight)"/>
+    <rect x="37" y="4" width="8" height="30" rx="4" fill="url(#skinHighlight)"/>
+    <rect x="28" y="7" width="8" height="27" rx="4" fill="url(#skinHighlight)"/>
+    <rect x="20" y="14" width="7" height="20" rx="4" fill="url(#skinHighlight)"/>
+    <!-- Knuckle accents -->
+    <line x1="48" y1="20" x2="52" y2="20" stroke="#4a1f0a" stroke-width="1.2" opacity="0.5"/>
+    <line x1="39" y1="18" x2="43" y2="18" stroke="#4a1f0a" stroke-width="1.2" opacity="0.5"/>
+    <line x1="30" y1="20" x2="34" y2="20" stroke="#4a1f0a" stroke-width="1.2" opacity="0.5"/>
+  </g>
+
+  <!-- Motion Trails Indicator -->
+  <path d="M 120 290 Q 150 270 170 300" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5" stroke-dasharray="3,3"/>
+  <path d="M 280 280 Q 250 260 230 290" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5" stroke-dasharray="3,3"/>
+</svg>
