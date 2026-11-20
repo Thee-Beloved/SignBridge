@@ -1,0 +1,74 @@
+# Sign Bridge — .gitignore
+# ============================================================
+# SECRETS — NEVER COMMIT THESE
+# ============================================================
+.env
+*.env
+.env.local
+.env.production
+.env.staging
+
+# ============================================================
+# Generated video / audio files (user data — never commit)
+# ============================================================
+backend/uploads/*
+backend/outputs/*
+backend/frames_cache/*
+
+# Keep the directory structure but not the files
+!backend/uploads/.gitkeep
+!backend/outputs/.gitkeep
+!backend/frames_cache/.gitkeep
+
+# Extra safety net — block any stray media files everywhere
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.webm
+*.mkv
+*.avi
+
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+env/
+.venv/
+pip-log.txt
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# ============================================================
+# Node / Frontend build artifacts (if added later)
+# ============================================================
+node_modules/
+.npm
+*.log
+dist/
+.parcel-cache/
+
+# ============================================================
+# OS / Editor
+# ============================================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+desktop.ini

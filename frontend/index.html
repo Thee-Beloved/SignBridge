@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Bridge — KSL Reel Accessibility</title>
+  <meta name="description" content="The first AI that turns any Instagram Reel into Kenyan Sign Language in real-time. Powered by Meta Muse Wonder, Spark, SAM 3.1, and Muse Image."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css?v=3"/>
+</head>
+<body>
+
+<!-- ─── BACKGROUND ──────────────────────────────────────────────────── -->
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ─── NAVBAR ──────────────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="logo" aria-label="Sign Bridge Home">
+      <span class="logo-icon">🤝</span>
+      <span class="logo-text">Sign<span class="logo-accent">Bridge</span></span>
+    </a>
+    <div class="nav-badges">
+      <span class="badge badge-meta">Built on Meta</span>
+      <span class="badge badge-hack">Meta Hackathon 2026</span>
+    </div>
+    <div class="nav-links">
+      <a href="#how-it-works" class="nav-link">How it works</a>
+      <a href="#demo" class="nav-link">Try it</a>
+      <a href="#impact" class="nav-link">Impact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────── -->
+<header class="hero" role="banner">
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      70M Deaf people globally — locked out of social media
+    </div>
+
+    <h1 class="hero-title">
+      The first AI that turns<br/>
+      any Reel into
+      <span class="gradient-text">Kenyan Sign Language</span>
+      <br/>in real-time.
+    </h1>
+
+    <p class="hero-subtitle">
+      Sign Bridge uses Meta Muse Wonder + Spark 1.3 + SAM 3.1 + Muse Image
+      to overlay a live KSL signing avatar onto any Instagram Reel —
+      making the Creator Economy accessible for 1M Deaf Kenyans.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#demo" class="btn btn-primary" id="try-btn">
+        Try Sign Bridge
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
+    </div>
+
+    <div class="hero-stats" role="list">
+      <div class="stat" role="listitem">
+        <span class="stat-num">70M</span>
+        <span class="stat-label">Deaf people globally</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat" role="listitem">
+        <span class="stat-num">1M</span>
+        <span class="stat-label">Deaf Kenyans</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat" role="listitem">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Meta APIs used</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat" role="listitem">
+        <span class="stat-num">0</span>
+        <span class="stat-label">KSL tools exist today</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <div class="phone-mockup">
+      <div class="phone-screen">
+        <div class="reel-preview">
+          <div class="reel-content">
+            <div class="reel-video-bg"></div>
+            <div class="reel-caption">🍚 Pilau Recipe...</div>
+            <div class="avatar-bubble" id="hero-avatar">
+              <div class="avatar-inner">
+                <div class="signing-hand hand-left"></div>
+                <div class="signing-hand hand-right"></div>
+                <div class="avatar-face"></div>
+              </div>
+              <div class="avatar-label">KSL</div>
+            </div>
+          </div>
+          <div class="gloss-ticker">
+            <span id="hero-gloss">PILAU COOK TODAY...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── PIPELINE STEPS ────────────────────────────────────────────────── -->
+<section id="how-it-works" class="pipeline-section" aria-labelledby="pipeline-heading">
+  <div class="section-inner">
+    <div class="section-tag">How It Works</div>
+    <h2 id="pipeline-heading" class="section-title">4 Meta APIs. One seamless pipeline.</h2>
+    <p class="section-subtitle">
+      From noisy Reel audio to synced KSL avatar in seconds.
+    </p>
+
+    <div class="pipeline-flow" role="list">
+      <div class="pipeline-step" role="listitem">
+        <div class="step-icon" style="--step-color: #6366f1;">🎙️</div>
+        <div class="step-num">01</div>
+        <h3 class="step-title">Muse Wonder 2</h3>
+        <p class="step-desc">
+          Transcribes audio even with <strong>loud music + Sheng</strong>
+          (Swahili-English mix). Returns word-level timestamps for avatar sync.
+        </p>
+        <div class="step-api-badge">muse-wonder-2</div>
+      </div>
+
+      <div class="pipeline-arrow" aria-hidden="true">→</div>
+
+      <div class="pipeline-step" role="listitem">
+        <div class="step-icon" style="--step-color: #8b5cf6;">🧠</div>
+        <div class="step-num">02</div>
+        <h3 class="step-title">Muse Spark 1.3</h3>
+        <p class="step-desc">
+          Translates English → <strong>KSL Gloss notation</strong> with
+          Kenyan grammar rules (SOV, no copulas, cultural signs).
+        </p>
+        <div class="step-example">
+          "Add two tomatoes" → <code>TOMATO TWO ADD</code>
+        </div>
+        <div class="step-api-badge">muse-spark-1.3</div>
+      </div>
+
+      <div class="pipeline-arrow" aria-hidden="true">→</div>
+
+      <div class="pipeline-step" role="listitem">
+        <div class="step-icon" style="--step-color: #ec4899;">👁️</div>
+        <div class="step-num">03</div>
+        <h3 class="step-title">SAM 3.1</h3>
+        <p class="step-desc">
+          Segments speaker's <strong>face and hands</strong>, then finds the
+          safest corner for avatar placement — never covers the speaker.
+        </p>
+        <div class="step-api-badge">sam-3.1</div>
+      </div>
+
+      <div class="pipeline-arrow" aria-hidden="true">→</div>
+
+      <div class="pipeline-step" role="listitem">
+        <div class="step-icon" style="--step-color: #f59e0b;">🎭</div>
+        <div class="step-num">04</div>
+        <h3 class="step-title">Muse Image</h3>
+        <p class="step-desc">
+          Generates a <strong>consistent Kenyan signing avatar</strong>
+          — same face/outfit every time — synced to each sign token.
+        </p>
+        <div class="step-api-badge">muse-image-3</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DEMO SECTION ──────────────────────────────────────────────────── -->
+<section id="demo" class="demo-section" aria-labelledby="demo-heading">
+  <div class="section-inner">
+    <div class="section-tag">Try It</div>
+    <h2 id="demo-heading" class="section-title">Upload a video. Get KSL back.</h2>
+
+    <!-- Mode Toggle -->
+    <div class="mode-toggle" role="tablist" aria-label="Mode selection">
+      <button class="mode-btn active" id="reel-mode-btn" role="tab" 
+              aria-selected="true" aria-controls="reel-panel" 
+              onclick="switchMode('reel')">
+        📱 Reel → KSL
+      </button>
+      <button class="mode-btn" id="creator-mode-btn" role="tab"
+              aria-selected="false" aria-controls="creator-panel"
+              onclick="switchMode('creator')">
+        🎥 Creator Mode
+      </button>
+    </div>
+
+    <!-- Reel → KSL Panel -->
+    <div id="reel-panel" class="demo-panel" role="tabpanel" aria-labelledby="reel-mode-btn">
+      <div class="upload-area" id="upload-zone" 
+           ondrop="handleDrop(event)" ondragover="handleDragOver(event)"
+           role="button" tabindex="0" aria-label="Upload video or paste Instagram URL"
+           onclick="document.getElementById('video-file').click()"
+           onkeydown="if(event.key==='Enter') document.getElementById('video-file').click()">
+        <div class="upload-icon">🎬</div>
+        <p class="upload-title">Drop your Reel here</p>
+        <p class="upload-sub">or paste an Instagram URL below · MP4, MOV up to 200MB</p>
+        <input type="file" id="video-file" accept="video/mp4,video/mov,video/quicktime"
+               class="sr-only" onchange="handleFileSelect(event)" aria-label="Select video file"/>
+      </div>
+
+      <div class="url-input-row">
+        <input type="url" id="reel-url" placeholder="Or paste Instagram Reel URL..."
+               class="url-input" aria-label="Instagram Reel URL"/>
+        <button class="btn btn-primary" id="process-btn" onclick="processReel()">
+          <span id="process-btn-text">Generate KSL</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="language-row">
+        <label for="sign-language" class="lang-label">Sign Language:</label>
+        <select id="sign-language" class="lang-select" aria-label="Select sign language">
+          <option value="KSL">🇰🇪 Kenyan Sign Language (KSL)</option>
+          <option value="USL">🇺🇬 Ugandan Sign Language (USL)</option>
+          <option value="TSL">🇹🇿 Tanzanian Sign Language (TSL)</option>
+          <option value="ASL">🇺🇸 American Sign Language (ASL)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Creator Mode Panel -->
+    <div id="creator-panel" class="demo-panel hidden" role="tabpanel" aria-labelledby="creator-mode-btn">
+      <div class="creator-info">
+        <div class="creator-info-icon">🦻</div>
+        <div>
+          <h3>Deaf Creator Mode</h3>
+          <p>Record yourself signing in KSL. Sign Bridge converts it to English voice + captions so hearing audiences can understand you.</p>
+        </div>
+      </div>
+      <div class="upload-area" id="creator-upload-zone"
+           onclick="document.getElementById('creator-file').click()"
+           role="button" tabindex="0" aria-label="Upload KSL signing video">
+        <div class="upload-icon">🤟</div>
+        <p class="upload-title">Upload your KSL signing video</p>
+        <p class="upload-sub">We'll add English voice + captions for hearing audiences</p>
+        <input type="file" id="creator-file" accept="video/*" class="sr-only"
+               onchange="handleCreatorFile(event)" aria-label="Select KSL video"/>
+      </div>
+      <button class="btn btn-primary" onclick="processCreator()" style="width:100%;">
+        Convert to English Voice
+      </button>
+    </div>
+
+    <!-- Progress Section -->
+    <div id="progress-section" class="progress-section hidden" aria-live="polite" aria-atomic="true">
+      <div class="progress-header">
+        <span id="progress-step">Processing...</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="pipeline-stages">
+        <div class="stage" id="stage-wonder">
+          <div class="stage-dot"></div>
+          <span>Wonder</span>
+        </div>
+        <div class="stage-line"></div>
+        <div class="stage" id="stage-spark">
+          <div class="stage-dot"></div>
+          <span>Spark</span>
+        </div>
+        <div class="stage-line"></div>
+        <div class="stage" id="stage-sam">
+          <div class="stage-dot"></div>
+          <span>SAM 3.1</span>
+        </div>
+        <div class="stage-line"></div>
+        <div class="stage" id="stage-image">
+          <div class="stage-dot"></div>
+          <span>Image</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Section -->
+    <div id="result-section" class="result-section hidden" aria-live="polite">
+      <h3 class="result-title">✅ KSL Video Ready</h3>
+
+      <div class="result-split">
+        <div class="result-panel">
+          <div class="result-panel-label">Original Reel</div>
+          <video id="original-video" class="result-video" controls aria-label="Original Reel">
+            <track kind="captions" label="English"/>
+          </video>
+        </div>
+        <div class="result-arrow" aria-hidden="true">🤝</div>
+        <div class="result-panel">
+          <div class="result-panel-label">With KSL Avatar</div>
+          <video id="output-video" class="result-video" controls aria-label="Reel with KSL signing avatar">
+            <track kind="captions" label="KSL Gloss"/>
+          </video>
+        </div>
+      </div>
+
+      <div class="gloss-result" aria-label="KSL Gloss output">
+        <div class="gloss-label">KSL Gloss Output:</div>
+        <div class="gloss-text" id="gloss-output"></div>
+      </div>
+
+      <div class="result-meta" id="result-meta"></div>
+
+      <button class="btn btn-primary" id="download-btn" onclick="downloadResult()">
+        ⬇️ Download KSL Video
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── IMPACT SECTION ────────────────────────────────────────────────── -->
+<section id="impact" class="impact-section" aria-labelledby="impact-heading">
+  <div class="section-inner">
+    <div class="section-tag">Impact</div>
+    <h2 id="impact-heading" class="section-title">Why this matters</h2>
+
+    <div class="impact-grid" role="list">
+      <div class="impact-card" role="listitem">
+        <div class="impact-icon">⚖️</div>
+        <h3>Meta's Lawsuit Risk</h3>
+        <p>Meta has been sued multiple times for inaccessibility. Sign Bridge is a proactive solution that protects Meta and creators.</p>
+      </div>
+      <div class="impact-card" role="listitem">
+        <div class="impact-icon">💰</div>
+        <h3>Unlocks Creator Economy</h3>
+        <p>1M Deaf Kenyans are locked out of monetizing Reels. Sign Bridge makes every Deaf creator accessible to all audiences.</p>
+      </div>
+      <div class="impact-card" role="listitem">
+        <div class="impact-icon">🌍</div>
+        <h3>Africa-First AI</h3>
+        <p>The first AI tool built for African Sign Languages. KSL → USL → TSL. No global product has ever addressed this gap.</p>
+      </div>
+      <div class="impact-card" role="listitem">
+        <div class="impact-icon">🤟</div>
+        <h3>Two-Way Bridge</h3>
+        <p>Deaf users can watch any Reel in KSL. Deaf creators can publish to hearing audiences. Full inclusion in both directions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── META STACK SECTION ────────────────────────────────────────────── -->
+<section class="stack-section" aria-labelledby="stack-heading">
+  <div class="section-inner">
+    <div class="section-tag">Tech Stack</div>
+    <h2 id="stack-heading" class="section-title">Built entirely on Meta</h2>
+    <div class="stack-grid" role="list">
+      <div class="stack-card" role="listitem">
+        <div class="stack-label">Audio Transcription</div>
+        <div class="stack-model">Muse Wonder 2</div>
+        <div class="stack-detail">Noise-robust, Sheng support, word timestamps</div>
+      </div>
+      <div class="stack-card" role="listitem">
+        <div class="stack-label">KSL Translation</div>
+        <div class="stack-model">Muse Spark 1.3</div>
+        <div class="stack-detail">20-example KSL grammar system prompt</div>
+      </div>
+      <div class="stack-card" role="listitem">
+        <div class="stack-label">Video Analysis</div>
+        <div class="stack-model">SAM 3.1</div>
+        <div class="stack-detail">Real-time face/hand segmentation + placement</div>
+      </div>
+      <div class="stack-card" role="listitem">
+        <div class="stack-label">Avatar Generation</div>
+        <div class="stack-model">Muse Image 3</div>
+        <div class="stack-detail">Consistent Kenyan signing avatar, transparent BG</div>
+      </div>
+      <div class="stack-card" role="listitem">
+        <div class="stack-label">Agent Orchestration</div>
+        <div class="stack-model">Muse Code</div>
+        <div class="stack-detail">Multi-agent pipeline coordination</div>
+      </div>
+      <div class="stack-card" role="listitem">
+        <div class="stack-label">Video Rendering</div>
+        <div class="stack-model">ffmpeg + Modal</div>
+        <div class="stack-detail">GPU-accelerated overlay rendering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="logo-icon">🤝</span>
+      <span class="logo-text">Sign<span class="logo-accent">Bridge</span></span>
+    </div>
+    <p class="footer-tagline">
+      Turning every Reel into Kenyan Sign Language — for 1M Deaf Kenyans and 70M globally.
+    </p>
+    <div class="footer-badges">
+      <span class="badge badge-meta">Meta Global AI Hackathon 2026</span>
+      <span class="badge badge-hack">Indie Track</span>
+      <span class="badge">Nairobi, Kenya 🇰🇪</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js?v=4"></script>
+</body>
+</html>
